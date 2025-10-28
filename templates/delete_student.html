@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Student</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <img src="{{ url_for('static', filename='photos/logo.jpg') }}" alt="CSE Logo" width="80" height="80">
+        <h1>Computer Science & Engineering Department <br>
+            Govt. Polytechnic Dwarahat (Almora)
+        </h1>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="navbar" style="text-align:center; margin-bottom:20px;">
+        <div class="dropdown">
+            <button onclick="toggleDropdown()">☰ Menu</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="/teacher_login">Login Teacher</a>
+                <a href="/student_login">Login Student</a>
+                <a href="/about">About Department</a>
+                <a href="/lab">Labs</a>
+                <a href="/contact">Contact Us</a>
+                <a href="/gallery">Gallery</a>
+                <a href="/">Home</a>
+            </div>
+        </div>
+        <a href="/teacher_login">Login Teacher</a>
+        <a href="/student_login">Login Student</a>
+        <a href="/about">About Department</a>
+        <a href="/lab">Labs</a>
+        <a href="/contact">Contact Us</a>
+        <a href="/gallery">Gallery</a>
+        <a href="/">Home</a>
+    </div>
+
+    <!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <!-- Delete Student Form -->
+    <div style="max-width:400px; margin:40px auto; border:1px solid #ccc; padding:20px; border-radius:10px;">
+        <h2 style="text-align:center;">Delete Student</h2>
+
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+
+            <div style="margin-bottom:15px;">
+                <label>{{ form.roll_no.label }}</label><br>
+                {{ form.roll_no(size=32) }}
+                {% for error in form.roll_no.errors %}
+                    <div style="color:red;">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div style="margin-bottom:15px;">
+                <label>{{ form.teacher_password.label }}</label><br>
+                {{ form.teacher_password(size=32) }}
+                {% for error in form.teacher_password.errors %}
+                    <div style="color:red;">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div style="text-align:center;">
+                {{ form.submit() }}
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer" style="text-align:center; margin-top:40px; border-top:1px solid #ccc; padding-top:10px;">
+        <p>&copy; 2025 CSE Department, Government Polytechnic Dwarahat. All rights reserved.</p>
+        <a href="/">Home</a> |
+        <a href="/contact">Contact</a> |
+        <a href="/about">About</a>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
